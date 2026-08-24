@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kitabu</string>
+    <string name="catalog_title">Library catalog</string>
+    <string name="reservations_title">My reservations</string>
+    <string name="catalog_nav">Catalog</string>
+    <string name="reservations_nav">Reservations</string>
+    <string name="search_books">Search by title or author</string>
+    <string name="clear_search">Clear search</string>
+    <string name="filter_all">All</string>
+    <string name="filter_available">Available</string>
+    <string name="filter_borrowed">Borrowed</string>
+    <string name="available">Available</string>
+    <string name="borrowed">Borrowed</string>
+    <string name="reserve">Reserve</string>
+    <string name="reserve_book">Reserve %1$s</string>
+    <string name="student_name">Student name</string>
+    <string name="default_student_name">Student User</string>
+    <string name="rental_duration">Rental duration</string>
+    <string name="return_deadline_preview">Return by %1$s</string>
+    <string name="name_required">Enter a student name.</string>
+    <string name="name_too_long">Name must be 50 characters or fewer.</string>
+    <string name="reservation_created">Reservation created. Pick it up from My Reservations.</string>
+    <string name="book_unavailable">That book is no longer available.</string>
+    <string name="record_not_found">The booking could not be found.</string>
+    <string name="invalid_transition">That action is not valid for the booking’s current status.</string>
+    <string name="action_failed">The action could not be completed. Try again.</string>
+    <string name="validation_failed">Check the entered information and try again.</string>
+    <string name="booking_picked_up">Book marked as picked up.</string>
+    <string name="booking_renewed">Return deadline extended by seven days.</string>
+    <string name="booking_returned">Book returned and available again.</string>
+    <string name="booking_cancelled">Pending reservation cancelled.</string>
+    <string name="pick_up">Pick up</string>
+    <string name="renew">Renew</string>
+    <string name="return_book">Return</string>
+    <string name="cancel_reservation">Cancel</string>
+    <string name="pending">Pending</string>
+    <string name="active">Active</string>
+    <string name="booking_date">Reserved %1$s</string>
+    <string name="return_deadline">Return deadline %1$s</string>
+    <string name="due_today">Due today</string>
+    <string name="no_books_found">No books match your search and filter.</string>
+    <string name="no_reservations">No active reservations yet.</string>
+    <string name="no_reservations_hint">Reserve an available title from the catalog to get started.</string>
+    <string name="confirm_return_title">Return this book?</string>
+    <string name="confirm_return_message">This marks the booking returned and makes the title available to other students.</string>
+    <string name="confirm_cancel_title">Cancel this reservation?</string>
+    <string name="confirm_cancel_message">The pending booking will be deleted and the title will become available.</string>
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="loading">Loading library…</string>
+    <string name="book_cover_description">Book icon for %1$s</string>
+    <string name="category_label">Category: %1$s</string>
+    <string name="by_author">by %1$s</string>
+    <plurals name="duration_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d day remaining</item>
+        <item quantity="other">%1$d days remaining</item>
+    </plurals>
+    <plurals name="overdue_days">
+        <item quantity="one">Overdue by %1$d day</item>
+        <item quantity="other">Overdue by %1$d days</item>
+    </plurals>
+</resources>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <rect width="1440" height="900" fill="#F3F5F2"/>
+  <text x="60" y="62" font-family="Arial" font-size="34" font-weight="700" fill="#17324D">Kitabu — MADB372 UI Design Board</text>
+  <text x="60" y="96" font-family="Arial" font-size="18" fill="#55615D">Material 3 · responsive catalogue · local Room lifecycle · accessible status colour + text</text>
+
+  <g transform="translate(70 135)">
+    <text x="0" y="-16" font-family="Arial" font-size="20" font-weight="700" fill="#17324D">1. Catalogue</text>
+    <rect x="0" y="0" width="380" height="700" rx="34" fill="#FBFCF9" stroke="#17324D" stroke-width="3"/>
+    <text x="28" y="62" font-family="Arial" font-size="28" fill="#1A1C1B">Library catalog</text>
+    <rect x="28" y="92" width="324" height="58" rx="12" fill="none" stroke="#0B6B57" stroke-width="3"/>
+    <text x="54" y="128" font-family="Arial" font-size="17" fill="#59625F">⌕  Search by title or author</text>
+    <rect x="28" y="170" width="60" height="36" rx="18" fill="#E8DDFC"/><text x="48" y="194" font-family="Arial" font-size="15">All</text>
+    <rect x="98" y="170" width="108" height="36" rx="18" fill="none" stroke="#99909F"/><text x="116" y="194" font-family="Arial" font-size="15">Available</text>
+    <rect x="216" y="170" width="100" height="36" rx="18" fill="none" stroke="#99909F"/><text x="235" y="194" font-family="Arial" font-size="15">Borrowed</text>
+    <rect x="28" y="228" width="150" height="330" rx="24" fill="#F5EEFA"/>
+    <rect x="50" y="250" width="46" height="46" rx="12" fill="#E9D9FF"/><text x="65" y="281" font-family="Arial" font-size="24">▣</text>
+    <text x="50" y="326" font-family="Arial" font-size="19" font-weight="700">Android</text><text x="50" y="352" font-family="Arial" font-size="19" font-weight="700">Programming</text>
+    <text x="50" y="382" font-family="Arial" font-size="15">by Bill Phillips</text><text x="50" y="415" font-family="Arial" font-size="14" fill="#555">Mobile Development</text>
+    <rect x="50" y="438" width="92" height="30" rx="15" fill="#D7F5E8"/><text x="62" y="458" font-family="Arial" font-size="14" font-weight="700" fill="#0A4F3F">Available</text>
+    <text x="92" y="520" font-family="Arial" font-size="16" font-weight="700" fill="#0B6B57">Reserve</text>
+    <rect x="194" y="228" width="158" height="330" rx="24" fill="#F5EEFA"/>
+    <rect x="216" y="250" width="46" height="46" rx="12" fill="#E9D9FF"/><text x="231" y="281" font-family="Arial" font-size="24">▣</text>
+    <text x="216" y="326" font-family="Arial" font-size="19" font-weight="700">Clean Code</text><text x="216" y="356" font-family="Arial" font-size="15">Robert C. Martin</text>
+    <text x="216" y="395" font-family="Arial" font-size="14" fill="#555">Software</text><text x="216" y="415" font-family="Arial" font-size="14" fill="#555">Engineering</text>
+    <rect x="216" y="438" width="92" height="30" rx="15" fill="#FFE1C7"/><text x="229" y="458" font-family="Arial" font-size="14" font-weight="700" fill="#783A00">Borrowed</text>
+    <rect x="0" y="610" width="380" height="90" fill="#F5EEFA"/><text x="70" y="660" font-family="Arial" font-size="17" font-weight="700" fill="#17324D">▣  Catalog</text><text x="238" y="660" font-family="Arial" font-size="17">▮ Reservations</text>
+  </g>
+
+  <g transform="translate(530 135)">
+    <text x="0" y="-16" font-family="Arial" font-size="20" font-weight="700" fill="#17324D">2. Reservation sheet</text>
+    <rect x="0" y="0" width="380" height="700" rx="34" fill="#D7D9D6" stroke="#17324D" stroke-width="3"/>
+    <rect x="0" y="145" width="380" height="555" rx="34" fill="#F8F2FD"/>
+    <rect x="166" y="166" width="48" height="5" rx="3" fill="#4C454F"/>
+    <text x="28" y="230" font-family="Arial" font-size="26" font-weight="700">Reserve Android</text><text x="28" y="263" font-family="Arial" font-size="26" font-weight="700">Programming</text>
+    <text x="28" y="296" font-family="Arial" font-size="17" fill="#555">by Bill Phillips</text>
+    <rect x="28" y="328" width="324" height="66" rx="10" fill="none" stroke="#0B6B57" stroke-width="3"/><text x="42" y="326" font-family="Arial" font-size="14" fill="#0B6B57">Student name</text><text x="46" y="370" font-family="Arial" font-size="18">Student User</text>
+    <text x="28" y="438" font-family="Arial" font-size="17" font-weight="700">Rental duration</text>
+    <rect x="28" y="458" width="82" height="42" rx="20" fill="none" stroke="#99909F"/><text x="48" y="485" font-family="Arial" font-size="15">7 days</text>
+    <rect x="120" y="458" width="94" height="42" rx="20" fill="#E8DDFC"/><text x="139" y="485" font-family="Arial" font-size="15">14 days</text>
+    <rect x="224" y="458" width="94" height="42" rx="20" fill="none" stroke="#99909F"/><text x="244" y="485" font-family="Arial" font-size="15">21 days</text>
+    <text x="28" y="536" font-family="Arial" font-size="16" fill="#555">Return by 7 September 2026</text>
+    <rect x="28" y="574" width="324" height="62" rx="31" fill="#0B6B57"/><text x="154" y="614" font-family="Arial" font-size="18" font-weight="700" fill="#FFF">Reserve</text>
+  </g>
+
+  <g transform="translate(990 135)">
+    <text x="0" y="-16" font-family="Arial" font-size="20" font-weight="700" fill="#17324D">3. Reservations dashboard</text>
+    <rect x="0" y="0" width="380" height="700" rx="34" fill="#FBFCF9" stroke="#17324D" stroke-width="3"/>
+    <text x="28" y="62" font-family="Arial" font-size="28">My reservations</text>
+    <rect x="28" y="92" width="324" height="230" rx="24" fill="#F5EEFA"/>
+    <text x="50" y="132" font-family="Arial" font-size="20" font-weight="700">Introduction to Algorithms</text><text x="50" y="160" font-family="Arial" font-size="15">Thomas H. Cormen</text>
+    <rect x="268" y="114" width="66" height="30" rx="15" fill="#D7F5E8"/><text x="281" y="134" font-family="Arial" font-size="13" font-weight="700" fill="#0A4F3F">Active</text>
+    <text x="50" y="199" font-family="Arial" font-size="14">Return deadline 10 Sep 2026</text><text x="50" y="226" font-family="Arial" font-size="14" font-weight="700" fill="#0B6B57">17 days remaining</text>
+    <rect x="50" y="250" width="120" height="44" rx="22" fill="none" stroke="#99909F"/><text x="88" y="278" font-family="Arial" font-size="15">Renew</text>
+    <rect x="184" y="250" width="144" height="44" rx="22" fill="#0B6B57"/><text x="232" y="278" font-family="Arial" font-size="15" fill="#FFF">Return</text>
+    <rect x="28" y="342" width="324" height="230" rx="24" fill="#F5EEFA"/>
+    <text x="50" y="382" font-family="Arial" font-size="20" font-weight="700">Clean Code</text><text x="50" y="410" font-family="Arial" font-size="15">Robert C. Martin</text>
+    <rect x="264" y="364" width="70" height="30" rx="15" fill="#FFE8A3"/><text x="273" y="384" font-family="Arial" font-size="13" font-weight="700" fill="#5B4300">Pending</text>
+    <text x="50" y="449" font-family="Arial" font-size="14">Return deadline 7 Sep 2026</text><text x="50" y="476" font-family="Arial" font-size="14" font-weight="700" fill="#0B6B57">14 days remaining</text>
+    <rect x="50" y="500" width="120" height="44" rx="22" fill="#0B6B57"/><text x="84" y="528" font-family="Arial" font-size="15" fill="#FFF">Pick up</text>
+    <rect x="184" y="500" width="144" height="44" rx="22" fill="none" stroke="#99909F"/><text x="229" y="528" font-family="Arial" font-size="15">Cancel</text>
+    <rect x="0" y="610" width="380" height="90" fill="#F5EEFA"/><text x="70" y="660" font-family="Arial" font-size="17">▣  Catalog</text><text x="226" y="660" font-family="Arial" font-size="17" font-weight="700" fill="#17324D">▮ Reservations</text>
+  </g>
+</svg>
