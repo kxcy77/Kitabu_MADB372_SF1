@@ -96,3 +96,7 @@ The full screenshot sequence is in `docs/screenshots/`, the concise monitor demo
 ## Submission evidence
 
 Real emulator screenshots and the screenshot document are stored under `docs/`. Replace `<StudName>` in the final document and ZIP names before Canvas submission.
+
+## Public repository
+
+The submission source is available at [github.com/kxcy77/Kitabu_MADB372_SF1](https://github.com/kxcy77/Kitabu_MADB372_SF1).
