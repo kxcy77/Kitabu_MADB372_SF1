@@ -1,102 +1,115 @@
 # Kitabu — Library Book Rental & Reservation System
 
-Kitabu is a native, offline-first Android application for browsing a local library catalogue, reserving books, tracking deadlines, and managing reservation lifecycles. It was built for MADB372 Task 1 using Kotlin, Jetpack Compose, Room, MVVM, Coroutines, Flow, and Navigation Compose.
+Public repository: <https://github.com/kxcy77/Kitabu_MADB372_SF1>
 
-## Core features
+Kitabu is a native, offline-first Android application for browsing a local library catalogue, reserving books, tracking deadlines, and managing reservation lifecycles. It was built for MADB372/SF1 Task 1 using Kotlin, Jetpack Compose Material 3, Room, MVVM, Coroutines, Flow, and Navigation Compose.
 
-- Responsive book catalogue with case-insensitive title/author search and availability filters.
-- Availability badges that update reactively from Room.
-- Reservation sheet with validated student name and 7, 14, or 21-day rental periods.
-- Pending pickup, cancellation, active renewal, and return workflows.
-- Atomic Room transactions prevent half-completed lifecycle changes.
-- Offline persistence with 12 seeded books and two demonstration bookings.
+## Features demonstrated
 
-## Architecture
+- Responsive `LazyVerticalGrid` catalogue with title/author search and All/Available/Borrowed filters.
+- Book cards showing title, author, category, and availability badges.
+- Material 3 reservation bottom sheet with validated student name and 7/14/21-day duration choices.
+- PENDING pickup/cancellation and ACTIVE renewal/return workflows.
+- Atomic Room transactions for reserve, pickup, renew, return, and cancel.
+- Offline persistence with 12 seeded books and one PENDING plus one ACTIVE demonstration booking.
 
-```text
-Compose UI -> ViewModel/StateFlow -> LibraryRepository -> LibraryDao -> Room/SQLite
-     ^                                                        |
-     +---------------------- Flow updates ---------------------+
-```
+## Requirements and setup
 
-The project uses a single Activity and one app module. Manual dependency injection keeps the assignment easy to explain while preserving separation between `ui`, `domain`, `data`, and `di` packages.
-
-## Database
-
-- `books`: `book_id`, `title`, `author`, `category`, `is_available`
-- `bookings`: `booking_id`, `book_owner_id`, `user_name`, `booking_date`, `return_deadline`, `status`
-- `bookings.book_owner_id` references `books.book_id` with cascade deletion.
-- `BookingStatus` is stored through a Room type converter.
-
-## Requirements
-
-- Android Studio 2026.1 or compatible
+- Android Studio Ladybug or newer
 - JDK 17+
 - Android SDK 37
-- Android device or emulator running API 26+
-
-## Build and test
+- Android device/emulator API 26+
 
 ```bash
+git clone https://github.com/kxcy77/Kitabu_MADB372_SF1.git
+cd Kitabu_MADB372_SF1
 ./gradlew testDebugUnitTest
 ./gradlew lintDebug
 ./gradlew assembleDebug
 ./gradlew connectedDebugAndroidTest
 ```
 
-Open the project folder in Android Studio, allow Gradle sync to finish, then run the `app` configuration.
+Open the folder in Android Studio, allow Gradle sync to finish, and run the `app` configuration. The app is offline-first; no Firebase, REST API, authentication, payment, or cloud account is required.
 
-### Verified baseline
+## Architecture and data flow
 
-The checked-in version was verified on 24 August 2026 with:
+```text
+Compose screen
+    -> ViewModel + immutable StateFlow
+    -> LibraryRepository
+    -> LibraryDao
+    -> Room / SQLite
+    ^
+    | Room Flow recomposition via collectAsStateWithLifecycle()
+```
 
-- Five JVM unit tests passing.
-- Seven connected tests passing on `bkk_api26` (API 26).
-- Seven connected tests passing on `medium_phone` (API 36).
-- `lintDebug` and `assembleDebug` passing.
+The single `MainActivity` hosts a `NavHost` with Catalog and My Reservations destinations. Manual `AppContainer` dependency injection keeps the project small while separating `ui`, `domain`, `data`, and `di` packages.
 
-The connected suite covers the Room seed, case-insensitive search, joined dashboard rows, reservation rollback/double-reservation protection, foreign-key cascade, lifecycle actions, and the Compose start destination.
+## Room schema and lifecycle rules
 
-## Lifecycle rules
-
-1. Reserve claims an available book and creates a PENDING booking in one transaction.
-2. Pick up changes PENDING to ACTIVE.
-3. Renew extends an ACTIVE deadline by seven days from the later of today or the existing deadline.
-4. Return changes ACTIVE to RETURNED and releases the book in one transaction.
-5. Cancel deletes only a PENDING booking and releases the book in one transaction.
-
-Invalid transitions and double reservations are rejected without partial writes.
-
-## Scope and limitation
-
-“Real time” means immediate updates on the same device through Room `Flow`. Cloud synchronization, authentication, payments, Firebase, REST services, and multi-user accounts are intentionally out of scope under the assignment specification.
-
-## Rubric evidence
-
-| Requirement | Implementation/evidence |
+| Table | Important columns and constraints |
 | --- | --- |
-| Native responsive UI | Compose Material 3 catalogue grid, search, filters, sheet, dashboard, light/dark theme |
-| Navigation | Single-activity `NavHost` with Catalog and My Reservations destinations |
-| Persistent CRUD | Room entities, DAO, generated schema, seed callback, suspend writes and `Flow` reads |
-| Correct lifecycle | Atomic reserve, pickup, renew, return and cancel transactions with guarded transitions |
-| Reactive state | Repository flows mapped into immutable ViewModel `StateFlow` and collected lifecycle-aware |
-| Validation/accessibility | Trimmed 1–50 character user name, disabled duplicate submission, touch targets, labels and descriptions |
-| Verification | JVM, in-memory Room and Compose instrumentation tests on API 26 and API 36 |
+| `books` | `book_id` auto-generated primary key, `title`, `author`, `category`, `is_available` defaulting to true |
+| `bookings` | `booking_id` auto-generated primary key, indexed `book_owner_id`, `user_name`, `booking_date`, `return_deadline`, `status` |
+| Relationship | `bookings.book_owner_id` references `books.book_id` with `CASCADE` delete |
+| Conversion | `BookingStatus` is persisted through a Room string converter; timestamps are epoch milliseconds |
 
-## Screenshots and demonstration
+1. Reserve succeeds only when the availability update affects one book; it then creates a PENDING booking in the same transaction.
+2. Pickup permits only `PENDING -> ACTIVE`.
+3. Renew permits only ACTIVE bookings and adds seven days from the later of today or the existing deadline.
+4. Return permits only `ACTIVE -> RETURNED` and releases the book atomically.
+5. Cancel deletes only a PENDING booking and releases the book atomically.
 
-![Catalogue on API 36](docs/screenshots/08_api36_catalog.png)
+Invalid transitions and double reservations return an action failure without partial writes.
 
-![Reservation sheet](docs/screenshots/03_reservation_sheet.png)
+## CRUD and rubric mapping
 
-![Reservations dashboard](docs/screenshots/04_reservations_dashboard.png)
+| Rubric area | Evidence in the project |
+| --- | --- |
+| A — UI layout and navigation (40) | Compose catalogue grid, search/filter, availability badges, reservation sheet, dashboard, lifecycle buttons, single-activity `NavHost` |
+| B — Room database and business logic (40) | `BookEntity`, `BookingEntity`, cascade foreign key, converter, combined `LibraryDao`, joined booking projection, seed callback, atomic transactions |
+| C — Architecture and MVVM (15) | Compose screens -> ViewModels -> repository -> DAO, immutable `StateFlow`, manual `AppContainer`, KSP/Room and Navigation Compose configuration |
+| D — Advanced features and quality (15) | Room `Flow` observation, `viewModelScope.launch` writes, validation, logical packages, offline operation |
+| Monitor demonstrations (10) | Day 1 UI/navigation demonstration and Day 2 Room/database demonstration are represented by the screen sequence and lifecycle evidence |
 
-The full screenshot sequence is in `docs/screenshots/`, the concise monitor demonstration script is in `docs/MONITOR_DEMO.md`, and the importable design board is in `docs/design/Kitabu_Figma_Import.svg`.
+### CRUD evidence
+
+| Operation | App evidence | Source evidence |
+| --- | --- | --- |
+| Create | Reserve sheet creates a PENDING booking and removes the book from availability | `LibraryDao.reserveBook()` transaction |
+| Read | Search/filter catalogue and joined My Reservations dashboard | `observeBooks()` and open-booking join query |
+| Update | Pickup, renewal, and return controls update booking state/deadline | guarded DAO lifecycle transactions |
+| Delete | Cancel removes only a PENDING booking and frees its book | `cancelBooking()` transaction |
+
+## Verification record
+
+The local verification record for the checked-in implementation contains five JVM tests, seven connected tests on `bkk_api26` (API 26), seven connected tests on `medium_phone` (API 36), `lintDebug`, and `assembleDebug`. These results were recorded on 24 August 2026; rerun the commands above if a fresh machine-level result is required.
+
+The source and schema confirm the entities, LIKE search, joined dashboard query, cascade foreign key, seed data, guarded transactions, `collectAsStateWithLifecycle()`, `stateIn(WhileSubscribed(5_000))`, asynchronous writes, and 1–50 character name validation. The report distinguishes source evidence from execution evidence rather than treating source inspection as a passing test result.
+
+## Screenshot evidence
+
+The complete, uncropped emulator sequence is in [`docs/screenshots/`](docs/screenshots/). The source capture list is:
+
+| File | Demonstrates |
+| --- | --- |
+| `01_catalog.png` | API 26 catalogue, badges, filters, and navigation |
+| `02_search_filter.png` | Search field interaction with `Android` entered |
+| `03_reservation_sheet.png` | Student name, duration choices, deadline preview, Reserve |
+| `04_reservations_dashboard.png` | ACTIVE and PENDING cards with lifecycle controls |
+| `05_renewed_deadline.png` | Seven-day renewal snackbar and updated deadline |
+| `06_return_confirmation.png` | Confirmation required before returning an ACTIVE booking |
+| `07_returned_available.png` | Filtered title visible as Available after return |
+| `08_api36_catalog.png` | API 36 responsive grid with Available and Borrowed badges |
+
+`02_search_filter.png` is an input-state capture; the filtered result and post-return availability are shown clearly in `07_returned_available.png`. A single frame does not prove the complete before/after reactive transition, so the report labels that limitation explicitly.
+
+The monitor demonstration script is in [`docs/MONITOR_DEMO.md`](docs/MONITOR_DEMO.md), and the importable design board is [`docs/design/Kitabu_Figma_Import.svg`](docs/design/Kitabu_Figma_Import.svg). The SVG is an importable local design board; no public Figma URL is claimed.
+
+## Scope and limitations
+
+“Real time” means immediate reactive updates on the same device through Room `Flow`; cross-device synchronisation is out of scope. Authentication, cloud services, payments, Firebase, REST services, multi-user accounts, and late-fee processing are intentionally excluded by the assignment scope. A fresh before/after screenshot pair for reserve/return and a standalone completed-cancellation screenshot are recommended additions if the lecturer requires visual proof of every transition.
 
 ## Submission evidence
 
-Real emulator screenshots and the screenshot document are stored under `docs/`. Replace `<StudName>` in the final document and ZIP names before Canvas submission.
-
-## Public repository
-
-The submission source is available at [github.com/kxcy77/Kitabu_MADB372_SF1](https://github.com/kxcy77/Kitabu_MADB372_SF1).
+The project folder is `Kitabu_MADB372_SF1`. The generated screenshot report is named `StudName_MADB372_SF1.docx` with a matching PDF export and ZIP. Replace `StudName` with the real student name before Canvas submission; no name has been invented here.
